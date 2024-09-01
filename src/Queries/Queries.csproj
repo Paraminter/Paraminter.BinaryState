@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <AssemblyName>Paraminter.BinaryState.Queries</AssemblyName>
+
+        <RootNamespace>Paraminter.BinaryState.Queries</RootNamespace>
+        
+        <PackageId>Paraminter.BinaryState.Queries</PackageId>
+        <Description>Defines queries for Paraminter binary state representations.</Description>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Paraminter.Cqs.Queries" />
+    </ItemGroup>
+
+</Project>
