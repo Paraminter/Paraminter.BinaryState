@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <AssemblyName>Paraminter.BinaryState.Commands</AssemblyName>
+
+        <RootNamespace>Paraminter.BinaryState.Commands</RootNamespace>
+        
+        <PackageId>Paraminter.BinaryState.Commands</PackageId>
+        <Description>Defines commands for Paraminter binary state representations.</Description>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Paraminter.Cqs.Commands" />
+    </ItemGroup>
+
+</Project>
