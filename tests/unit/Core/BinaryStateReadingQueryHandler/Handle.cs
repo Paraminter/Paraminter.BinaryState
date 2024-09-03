@@ -22,7 +22,7 @@ public sealed class Handle
     }
 
     [Fact]
-    public void ValidQuery_ReturnsState()
+    public void ValidQuery_ReadsState()
     {
         var expected = true;
 
