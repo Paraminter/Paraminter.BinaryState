@@ -43,6 +43,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinaryStateReaderProvider",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinaryStateProvider", "tests\unit\Core\BinaryStateProvider\BinaryStateProvider.csproj", "{47460DA2-79FB-4EBD-9169-43384C9C4C88}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinaryStateSettingCommandHandler", "tests\unit\Core\BinaryStateSettingCommandHandler\BinaryStateSettingCommandHandler.csproj", "{522A6310-B83E-4C20-8AE5-2D7B5F587079}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinaryStateResettingCommandHandler", "tests\unit\Core\BinaryStateResettingCommandHandler\BinaryStateResettingCommandHandler.csproj", "{7684DDDE-DF2B-4468-A43E-AA164EFFE107}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinaryStateReadingQueryHandler", "tests\unit\Core\BinaryStateReadingQueryHandler\BinaryStateReadingQueryHandler.csproj", "{5EA2DA18-2A54-401D-9FAA-FF818BB6372F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +99,18 @@ Global
 		{47460DA2-79FB-4EBD-9169-43384C9C4C88}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47460DA2-79FB-4EBD-9169-43384C9C4C88}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47460DA2-79FB-4EBD-9169-43384C9C4C88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{522A6310-B83E-4C20-8AE5-2D7B5F587079}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{522A6310-B83E-4C20-8AE5-2D7B5F587079}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{522A6310-B83E-4C20-8AE5-2D7B5F587079}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{522A6310-B83E-4C20-8AE5-2D7B5F587079}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7684DDDE-DF2B-4468-A43E-AA164EFFE107}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7684DDDE-DF2B-4468-A43E-AA164EFFE107}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7684DDDE-DF2B-4468-A43E-AA164EFFE107}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7684DDDE-DF2B-4468-A43E-AA164EFFE107}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EA2DA18-2A54-401D-9FAA-FF818BB6372F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EA2DA18-2A54-401D-9FAA-FF818BB6372F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EA2DA18-2A54-401D-9FAA-FF818BB6372F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EA2DA18-2A54-401D-9FAA-FF818BB6372F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -115,5 +133,8 @@ Global
 		{6F267832-BF80-4639-85D7-287E3DD521A7} = {C4E09AB4-D69F-4C54-AF24-A8065A00E508}
 		{1BCFD83B-E528-402B-923A-85E5FCE405DA} = {C4E09AB4-D69F-4C54-AF24-A8065A00E508}
 		{47460DA2-79FB-4EBD-9169-43384C9C4C88} = {C4E09AB4-D69F-4C54-AF24-A8065A00E508}
+		{522A6310-B83E-4C20-8AE5-2D7B5F587079} = {C4E09AB4-D69F-4C54-AF24-A8065A00E508}
+		{7684DDDE-DF2B-4468-A43E-AA164EFFE107} = {C4E09AB4-D69F-4C54-AF24-A8065A00E508}
+		{5EA2DA18-2A54-401D-9FAA-FF818BB6372F} = {C4E09AB4-D69F-4C54-AF24-A8065A00E508}
 	EndGlobalSection
 EndGlobal
