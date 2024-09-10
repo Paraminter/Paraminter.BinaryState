@@ -24,17 +24,9 @@ public sealed class Handle
     [Fact]
     public void ValidQuery_ReturnsReader()
     {
-        var stateReader = Mock.Of<IBinaryStateReader>();
-
-        Mock<IBinaryState> stateMock = new();
-
-        stateMock.Setup(static (state) => state.Reader).Returns(stateReader);
-
-        Fixture.StateProviderMock.Setup(static (provider) => provider.Handle(It.IsAny<IGetBinaryStateQuery>())).Returns(stateMock.Object);
-
         var result = Target(Mock.Of<IGetBinaryStateReaderQuery>());
 
-        Assert.Same(stateReader, result);
+        Assert.Same(Fixture.StateReaderMock.Object, result);
     }
 
     private IBinaryStateReader Target(

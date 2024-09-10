@@ -2,7 +2,6 @@
 
 using Paraminter.BinaryState.Queries;
 using Paraminter.Cqs;
-using Paraminter.Cqs.Handlers;
 
 /// <summary>Handles queries by reading a binary state.</summary>
 /// <typeparam name="TQuery">The type of the handled queries.</typeparam>

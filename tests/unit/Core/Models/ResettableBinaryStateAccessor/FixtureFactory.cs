@@ -4,7 +4,7 @@ internal static class FixtureFactory
 {
     public static IFixture Create()
     {
-        var sut = new BinaryState();
+        var sut = new ResettableBinaryStateAccessor();
 
         return new Fixture(sut);
     }
@@ -12,14 +12,14 @@ internal static class FixtureFactory
     private sealed class Fixture
         : IFixture
     {
-        private readonly IBinaryState Sut;
+        private readonly IResettableBinaryStateAccessor Sut;
 
         public Fixture(
-            IBinaryState sut)
+            IResettableBinaryStateAccessor sut)
         {
             Sut = sut;
         }
 
-        IBinaryState IFixture.Sut => Sut;
+        IResettableBinaryStateAccessor IFixture.Sut => Sut;
     }
 }

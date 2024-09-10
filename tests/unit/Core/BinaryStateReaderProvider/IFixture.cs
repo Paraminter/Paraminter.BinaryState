@@ -4,11 +4,11 @@ using Moq;
 
 using Paraminter.BinaryState.Models;
 using Paraminter.BinaryState.Queries;
-using Paraminter.Cqs.Handlers;
+using Paraminter.Cqs;
 
 internal interface IFixture
 {
     public abstract IQueryHandler<IGetBinaryStateReaderQuery, IBinaryStateReader> Sut { get; }
 
-    public abstract Mock<IQueryHandler<IGetBinaryStateQuery, IBinaryState>> StateProviderMock { get; }
+    public abstract Mock<IBinaryStateReader> StateReaderMock { get; }
 }

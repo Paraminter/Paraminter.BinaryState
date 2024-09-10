@@ -4,7 +4,6 @@ using Moq;
 
 using Paraminter.BinaryState.Commands;
 using Paraminter.Cqs;
-using Paraminter.Cqs.Handlers;
 
 using System;
 

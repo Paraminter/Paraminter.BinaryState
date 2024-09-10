@@ -2,7 +2,6 @@
 
 using Paraminter.BinaryState.Commands;
 using Paraminter.Cqs;
-using Paraminter.Cqs.Handlers;
 
 /// <summary>Handles commands by resetting a binary state.</summary>
 /// <typeparam name="TQuery">The type of the handled commands.</typeparam>
