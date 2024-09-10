@@ -3,7 +3,7 @@
 using Paraminter.BinaryState.Commands;
 using Paraminter.BinaryState.Models;
 using Paraminter.BinaryState.Queries;
-using Paraminter.Cqs.Handlers;
+using Paraminter.Cqs;
 
 using System;
 

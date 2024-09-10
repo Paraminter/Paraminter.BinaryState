@@ -2,7 +2,7 @@
 
 using Xunit;
 
-public sealed class Reader_IsSet
+public sealed class IsSet
 {
     private readonly IFixture Fixture = FixtureFactory.Create();
 
@@ -17,12 +17,12 @@ public sealed class Reader_IsSet
     [Fact]
     public void Set_ReturnsTrue()
     {
-        Fixture.Sut.Setter.Set();
+        Fixture.Sut.Set();
 
         var result = Target();
 
         Assert.True(result);
     }
 
-    private bool Target() => Fixture.Sut.Reader.IsSet;
+    private bool Target() => Fixture.Sut.IsSet;
 }

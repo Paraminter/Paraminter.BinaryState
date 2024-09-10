@@ -4,7 +4,7 @@ using Moq;
 
 using Paraminter.BinaryState.Models;
 using Paraminter.BinaryState.Queries;
-using Paraminter.Cqs.Handlers;
+using Paraminter.Cqs;
 
 internal interface IFixture
 {

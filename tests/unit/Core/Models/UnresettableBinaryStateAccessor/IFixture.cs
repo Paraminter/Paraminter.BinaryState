@@ -2,5 +2,5 @@
 
 internal interface IFixture
 {
-    public abstract IBinaryState Sut { get; }
+    public abstract IUnresettableBinaryStateAccessor Sut { get; }
 }

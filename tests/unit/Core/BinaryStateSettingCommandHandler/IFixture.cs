@@ -4,7 +4,6 @@ using Moq;
 
 using Paraminter.BinaryState.Commands;
 using Paraminter.Cqs;
-using Paraminter.Cqs.Handlers;
 
 internal interface IFixture<in TCommand>
     where TCommand : ICommand

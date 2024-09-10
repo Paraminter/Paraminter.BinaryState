@@ -4,7 +4,6 @@ using Moq;
 
 using Paraminter.BinaryState.Queries;
 using Paraminter.Cqs;
-using Paraminter.Cqs.Handlers;
 
 internal interface IFixture<in TQuery>
     where TQuery : IQuery

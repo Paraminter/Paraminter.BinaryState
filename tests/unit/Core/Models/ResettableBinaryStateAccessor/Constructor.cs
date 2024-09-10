@@ -5,12 +5,12 @@ using Xunit;
 public sealed class Constructor
 {
     [Fact]
-    public void ReturnsState()
+    public void ReturnsAccessor()
     {
         var result = Target();
 
         Assert.NotNull(result);
     }
 
-    private static BinaryState Target() => new();
+    private static ResettableBinaryStateAccessor Target() => new();
 }
