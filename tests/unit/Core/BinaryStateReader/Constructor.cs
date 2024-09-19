@@ -3,8 +3,6 @@
 using Moq;
 
 using Paraminter.BinaryState.Models;
-using Paraminter.BinaryState.Queries;
-using Paraminter.Cqs;
 
 using System;
 
@@ -13,7 +11,7 @@ using Xunit;
 public sealed class Constructor
 {
     [Fact]
-    public void NullStateReaderProvider_ThrowsArgumentNullException()
+    public void NullModel_ThrowsArgumentNullException()
     {
         var result = Record.Exception(() => Target(null!));
 
@@ -23,14 +21,14 @@ public sealed class Constructor
     [Fact]
     public void ValidArguments_ReturnsProvider()
     {
-        var result = Target(Mock.Of<IQueryHandler<IGetBinaryStateReaderQuery, IBinaryStateReader>>());
+        var result = Target(Mock.Of<IBinaryStateReader>());
 
         Assert.NotNull(result);
     }
 
     private static BinaryStateReader Target(
-        IQueryHandler<IGetBinaryStateReaderQuery, IBinaryStateReader> stateReaderProvider)
+        IBinaryStateReader model)
     {
-        return new BinaryStateReader(stateReaderProvider);
+        return new BinaryStateReader(model);
     }
 }

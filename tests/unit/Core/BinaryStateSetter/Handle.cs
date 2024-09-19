@@ -3,8 +3,6 @@
 using Moq;
 
 using Paraminter.BinaryState.Commands;
-using Paraminter.BinaryState.Models;
-using Paraminter.BinaryState.Queries;
 
 using System;
 
@@ -25,13 +23,9 @@ public sealed class Handle
     [Fact]
     public void ValidArguments_Sets()
     {
-        Mock<IBinaryStateSetter> stateSetterMock = new();
-
-        Fixture.StateSetterProviderMock.Setup(static (handler) => handler.Handle(It.IsAny<IGetBinaryStateSetterQuery>())).Returns(stateSetterMock.Object);
-
         Target(Mock.Of<ISetBinaryStateCommand>());
 
-        stateSetterMock.Verify(static (setter) => setter.Set(), Times.Once);
+        Fixture.ModelMock.Verify(static (model) => model.Set(), Times.Once);
     }
 
     private void Target(

@@ -10,14 +10,14 @@ using System;
 public sealed class BinaryStateReader
     : IQueryHandler<IIsBinaryStateSetQuery, bool>
 {
-    private readonly IQueryHandler<IGetBinaryStateReaderQuery, IBinaryStateReader> StateReaderProvider;
+    private readonly IBinaryStateReader Model;
 
     /// <summary>Instantiates a reader of whether a binary state is set.</summary>
-    /// <param name="stateReaderProvider">Provides a reader of the binary state.</param>
+    /// <param name="model">The model-component reading the binary state.</param>
     public BinaryStateReader(
-        IQueryHandler<IGetBinaryStateReaderQuery, IBinaryStateReader> stateReaderProvider)
+        IBinaryStateReader model)
     {
-        StateReaderProvider = stateReaderProvider ?? throw new ArgumentNullException(nameof(stateReaderProvider));
+        Model = model ?? throw new ArgumentNullException(nameof(model));
     }
 
     bool IQueryHandler<IIsBinaryStateSetQuery, bool>.Handle(
@@ -28,8 +28,6 @@ public sealed class BinaryStateReader
             throw new ArgumentNullException(nameof(query));
         }
 
-        var stateReader = StateReaderProvider.Handle(GetBinaryStateReaderQuery.Instance);
-
-        return stateReader.IsSet;
+        return Model.IsSet;
     }
 }

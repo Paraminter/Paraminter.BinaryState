@@ -4,18 +4,17 @@ using Moq;
 
 using Paraminter.BinaryState.Commands;
 using Paraminter.BinaryState.Models;
-using Paraminter.BinaryState.Queries;
 using Paraminter.Cqs;
 
 internal static class FixtureFactory
 {
     public static IFixture Create()
     {
-        Mock<IQueryHandler<IGetBinaryStateSetterQuery, IBinaryStateSetter>> stateSetterProviderMock = new();
+        Mock<IBinaryStateSetter> modelMock = new();
 
-        var sut = new BinaryStateSetter(stateSetterProviderMock.Object);
+        var sut = new BinaryStateSetter(modelMock.Object);
 
-        return new Fixture(sut, stateSetterProviderMock);
+        return new Fixture(sut, modelMock);
     }
 
     private sealed class Fixture
@@ -23,19 +22,19 @@ internal static class FixtureFactory
     {
         private readonly ICommandHandler<ISetBinaryStateCommand> Sut;
 
-        private readonly Mock<IQueryHandler<IGetBinaryStateSetterQuery, IBinaryStateSetter>> StateSetterProviderMock;
+        private readonly Mock<IBinaryStateSetter> ModelMock;
 
         public Fixture(
             ICommandHandler<ISetBinaryStateCommand> sut,
-            Mock<IQueryHandler<IGetBinaryStateSetterQuery, IBinaryStateSetter>> stateSetterProviderMock)
+            Mock<IBinaryStateSetter> modelMock)
         {
             Sut = sut;
 
-            StateSetterProviderMock = stateSetterProviderMock;
+            ModelMock = modelMock;
         }
 
         ICommandHandler<ISetBinaryStateCommand> IFixture.Sut => Sut;
 
-        Mock<IQueryHandler<IGetBinaryStateSetterQuery, IBinaryStateSetter>> IFixture.StateSetterProviderMock => StateSetterProviderMock;
+        Mock<IBinaryStateSetter> IFixture.ModelMock => ModelMock;
     }
 }

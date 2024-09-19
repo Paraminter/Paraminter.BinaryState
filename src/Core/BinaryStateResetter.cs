@@ -2,7 +2,6 @@
 
 using Paraminter.BinaryState.Commands;
 using Paraminter.BinaryState.Models;
-using Paraminter.BinaryState.Queries;
 using Paraminter.Cqs;
 
 using System;
@@ -11,14 +10,14 @@ using System;
 public sealed class BinaryStateResetter
     : ICommandHandler<IResetBinaryStateCommand>
 {
-    private readonly IQueryHandler<IGetBinaryStateResetterQuery, IBinaryStateResetter> StateResetterProvider;
+    private readonly IBinaryStateResetter Model;
 
     /// <summary>Instantiates a resetter of a binary state.</summary>
-    /// <param name="stateResetterProvider">Provides a resetter of the binary state.</param>
+    /// <param name="model">The model-components resetting the binary state.</param>
     public BinaryStateResetter(
-        IQueryHandler<IGetBinaryStateResetterQuery, IBinaryStateResetter> stateResetterProvider)
+        IBinaryStateResetter model)
     {
-        StateResetterProvider = stateResetterProvider ?? throw new ArgumentNullException(nameof(stateResetterProvider));
+        Model = model ?? throw new ArgumentNullException(nameof(model));
     }
 
     void ICommandHandler<IResetBinaryStateCommand>.Handle(
@@ -29,8 +28,6 @@ public sealed class BinaryStateResetter
             throw new ArgumentNullException(nameof(command));
         }
 
-        var stateResetter = StateResetterProvider.Handle(GetBinaryStateResetterQuery.Instance);
-
-        stateResetter.Reset();
+        Model.Reset();
     }
 }
