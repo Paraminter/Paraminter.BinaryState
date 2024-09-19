@@ -10,5 +10,5 @@ internal interface IFixture
 {
     public abstract IQueryHandler<IIsBinaryStateSetQuery, bool> Sut { get; }
 
-    public abstract Mock<IQueryHandler<IGetBinaryStateReaderQuery, IBinaryStateReader>> StateReaderProviderMock { get; }
+    public abstract Mock<IBinaryStateReader> ModelMock { get; }
 }

@@ -10,11 +10,11 @@ internal static class FixtureFactory
 {
     public static IFixture Create()
     {
-        Mock<IQueryHandler<IGetBinaryStateReaderQuery, IBinaryStateReader>> stateReaderProviderMock = new();
+        Mock<IBinaryStateReader> modelMock = new();
 
-        var sut = new BinaryStateReader(stateReaderProviderMock.Object);
+        var sut = new BinaryStateReader(modelMock.Object);
 
-        return new Fixture(sut, stateReaderProviderMock);
+        return new Fixture(sut, modelMock);
     }
 
     private sealed class Fixture
@@ -22,19 +22,19 @@ internal static class FixtureFactory
     {
         private readonly IQueryHandler<IIsBinaryStateSetQuery, bool> Sut;
 
-        private readonly Mock<IQueryHandler<IGetBinaryStateReaderQuery, IBinaryStateReader>> StateReaderProviderMock;
+        private readonly Mock<IBinaryStateReader> ModelMock;
 
         public Fixture(
             IQueryHandler<IIsBinaryStateSetQuery, bool> sut,
-            Mock<IQueryHandler<IGetBinaryStateReaderQuery, IBinaryStateReader>> stateReaderProviderMock)
+            Mock<IBinaryStateReader> modelMock)
         {
             Sut = sut;
 
-            StateReaderProviderMock = stateReaderProviderMock;
+            ModelMock = modelMock;
         }
 
         IQueryHandler<IIsBinaryStateSetQuery, bool> IFixture.Sut => Sut;
 
-        Mock<IQueryHandler<IGetBinaryStateReaderQuery, IBinaryStateReader>> IFixture.StateReaderProviderMock => StateReaderProviderMock;
+        Mock<IBinaryStateReader> IFixture.ModelMock => ModelMock;
     }
 }

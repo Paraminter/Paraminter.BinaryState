@@ -2,7 +2,6 @@
 
 using Moq;
 
-using Paraminter.BinaryState.Models;
 using Paraminter.BinaryState.Queries;
 
 using System;
@@ -35,11 +34,7 @@ public sealed class Handle
 
     private void ReturnsValue(bool expected)
     {
-        Mock<IBinaryStateReader> stateReaderMock = new();
-
-        stateReaderMock.Setup(static (reader) => reader.IsSet).Returns(expected);
-
-        Fixture.StateReaderProviderMock.Setup(static (provider) => provider.Handle(It.IsAny<IGetBinaryStateReaderQuery>())).Returns(stateReaderMock.Object);
+        Fixture.ModelMock.Setup(static (model) => model.IsSet).Returns(expected);
 
         var result = Target(Mock.Of<IIsBinaryStateSetQuery>());
 
