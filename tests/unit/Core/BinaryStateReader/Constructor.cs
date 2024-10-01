@@ -19,7 +19,7 @@ public sealed class Constructor
     }
 
     [Fact]
-    public void ValidArguments_ReturnsProvider()
+    public void ValidArguments_ReturnsReader()
     {
         var result = Target(Mock.Of<IBinaryStateReader>());
 
