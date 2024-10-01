@@ -20,7 +20,7 @@ public sealed class Constructor
     }
 
     [Fact]
-    public void ValidArguments_ReturnsProvider()
+    public void ValidArguments_ReturnsHandler()
     {
         var result = Target<ICommand>(Mock.Of<ICommandHandler<IResetBinaryStateCommand>>());
 
