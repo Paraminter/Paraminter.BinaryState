@@ -2,7 +2,7 @@
 
 using Xunit;
 
-public sealed class Reset
+public sealed class Resetter_Reset
 {
     private readonly IFixture Fixture = FixtureFactory.Create();
 
@@ -11,18 +11,18 @@ public sealed class Reset
     {
         Target();
 
-        Assert.False(Fixture.Sut.IsSet);
+        Assert.False(Fixture.Sut.Reader.IsSet);
     }
 
     [Fact]
     public void Set_Unsets()
     {
-        Fixture.Sut.Set();
+        Fixture.Sut.Setter.Set();
 
         Target();
 
-        Assert.False(Fixture.Sut.IsSet);
+        Assert.False(Fixture.Sut.Reader.IsSet);
     }
 
-    private void Target() => Fixture.Sut.Reset();
+    private void Target() => Fixture.Sut.Resetter.Reset();
 }

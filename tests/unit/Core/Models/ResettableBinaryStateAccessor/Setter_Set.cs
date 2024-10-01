@@ -2,7 +2,7 @@
 
 using Xunit;
 
-public sealed class Set
+public sealed class Setter_Set
 {
     private readonly IFixture Fixture = FixtureFactory.Create();
 
@@ -11,18 +11,18 @@ public sealed class Set
     {
         Target();
 
-        Assert.True(Fixture.Sut.IsSet);
+        Assert.True(Fixture.Sut.Reader.IsSet);
     }
 
     [Fact]
     public void AlreadySet_LeavesSet()
     {
-        Fixture.Sut.Set();
+        Fixture.Sut.Setter.Set();
 
         Target();
 
-        Assert.True(Fixture.Sut.IsSet);
+        Assert.True(Fixture.Sut.Reader.IsSet);
     }
 
-    private void Target() => Fixture.Sut.Set();
+    private void Target() => Fixture.Sut.Setter.Set();
 }
