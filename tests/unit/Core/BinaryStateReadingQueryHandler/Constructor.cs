@@ -14,7 +14,7 @@ public sealed class Constructor
     [Fact]
     public void NullStateReader_ThrowsArgumentNullException()
     {
-        var result = Record.Exception(() => Target<IQuery>(null!));
+        var result = Record.Exception(() => Target<IQuery, object>(null!));
 
         Assert.IsType<ArgumentNullException>(result);
     }
@@ -22,15 +22,15 @@ public sealed class Constructor
     [Fact]
     public void ValidArguments_ReturnsProvider()
     {
-        var result = Target<IQuery>(Mock.Of<IQueryHandler<IIsBinaryStateSetQuery, bool>>());
+        var result = Target<IQuery, object>(Mock.Of<IQueryHandler<IIsBinaryStateSetQuery, object>>());
 
         Assert.NotNull(result);
     }
 
-    private static BinaryStateReadingQueryHandler<TQuery> Target<TQuery>(
-        IQueryHandler<IIsBinaryStateSetQuery, bool> stateReader)
+    private static BinaryStateReadingQueryHandler<TQuery, TResponse> Target<TQuery, TResponse>(
+        IQueryHandler<IIsBinaryStateSetQuery, TResponse> stateReader)
         where TQuery : IQuery
     {
-        return new BinaryStateReadingQueryHandler<TQuery>(stateReader);
+        return new BinaryStateReadingQueryHandler<TQuery, TResponse>(stateReader);
     }
 }
