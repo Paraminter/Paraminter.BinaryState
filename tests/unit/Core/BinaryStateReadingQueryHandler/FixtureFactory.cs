@@ -7,35 +7,35 @@ using Paraminter.Cqs;
 
 internal static class FixtureFactory
 {
-    public static IFixture<TQuery> Create<TQuery>()
+    public static IFixture<TQuery, TResponse> Create<TQuery, TResponse>()
         where TQuery : IQuery
     {
-        Mock<IQueryHandler<IIsBinaryStateSetQuery, bool>> stateReaderMock = new();
+        Mock<IQueryHandler<IIsBinaryStateSetQuery, TResponse>> stateReaderMock = new();
 
-        var sut = new BinaryStateReadingQueryHandler<TQuery>(stateReaderMock.Object);
+        var sut = new BinaryStateReadingQueryHandler<TQuery, TResponse>(stateReaderMock.Object);
 
-        return new Fixture<TQuery>(sut, stateReaderMock);
+        return new Fixture<TQuery, TResponse>(sut, stateReaderMock);
     }
 
-    private sealed class Fixture<TQuery>
-        : IFixture<TQuery>
+    private sealed class Fixture<TQuery, TResponse>
+        : IFixture<TQuery, TResponse>
         where TQuery : IQuery
     {
-        private readonly IQueryHandler<TQuery, bool> Sut;
+        private readonly IQueryHandler<TQuery, TResponse> Sut;
 
-        private readonly Mock<IQueryHandler<IIsBinaryStateSetQuery, bool>> StateReaderMock;
+        private readonly Mock<IQueryHandler<IIsBinaryStateSetQuery, TResponse>> StateReaderMock;
 
         public Fixture(
-            IQueryHandler<TQuery, bool> sut,
-            Mock<IQueryHandler<IIsBinaryStateSetQuery, bool>> stateReaderMock)
+            IQueryHandler<TQuery, TResponse> sut,
+            Mock<IQueryHandler<IIsBinaryStateSetQuery, TResponse>> stateReaderMock)
         {
             Sut = sut;
 
             StateReaderMock = stateReaderMock;
         }
 
-        IQueryHandler<TQuery, bool> IFixture<TQuery>.Sut => Sut;
+        IQueryHandler<TQuery, TResponse> IFixture<TQuery, TResponse>.Sut => Sut;
 
-        Mock<IQueryHandler<IIsBinaryStateSetQuery, bool>> IFixture<TQuery>.StateReaderMock => StateReaderMock;
+        Mock<IQueryHandler<IIsBinaryStateSetQuery, TResponse>> IFixture<TQuery, TResponse>.StateReaderMock => StateReaderMock;
     }
 }

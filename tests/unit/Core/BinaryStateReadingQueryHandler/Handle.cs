@@ -14,7 +14,7 @@ public sealed class Handle
     [Fact]
     public void NullQuery_ThrowsArgumentNullException()
     {
-        var fixture = FixtureFactory.Create<IQuery>();
+        var fixture = FixtureFactory.Create<IQuery, object>();
 
         var result = Record.Exception(() => Target(fixture, null!));
 
@@ -24,19 +24,19 @@ public sealed class Handle
     [Fact]
     public void ValidQuery_ReadsState()
     {
-        var expected = true;
+        var expected = Mock.Of<object>();
 
-        var fixture = FixtureFactory.Create<IQuery>();
+        var fixture = FixtureFactory.Create<IQuery, object>();
 
         fixture.StateReaderMock.Setup(static (handler) => handler.Handle(It.IsAny<IIsBinaryStateSetQuery>())).Returns(expected);
 
         var result = Target(fixture, Mock.Of<IQuery>());
 
-        Assert.Equal(expected, result);
+        Assert.Same(expected, result);
     }
 
-    private static bool Target<TQuery>(
-        IFixture<TQuery> fixture,
+    private static TResponse Target<TQuery, TResponse>(
+        IFixture<TQuery, TResponse> fixture,
         TQuery query)
         where TQuery : IQuery
     {
