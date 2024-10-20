@@ -31,6 +31,6 @@ public sealed class BinaryStateReader
             throw new ArgumentNullException(nameof(query));
         }
 
-        return await Task.FromResult(Model.IsSet);
+        return await Task.FromResult(Model.IsSet).ConfigureAwait(false);
     }
 }

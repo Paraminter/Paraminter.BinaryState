@@ -32,6 +32,6 @@ public sealed class BinaryStateReadingQueryHandler<TQuery, TResponse>
             throw new System.ArgumentNullException(nameof(query));
         }
 
-        return await StateReader.Handle(IsBinaryStateSetQuery.Instance, cancellationToken);
+        return await StateReader.Handle(IsBinaryStateSetQuery.Instance, cancellationToken).ConfigureAwait(false);
     }
 }

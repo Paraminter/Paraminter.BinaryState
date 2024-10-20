@@ -33,6 +33,6 @@ public sealed class BinaryStateSetter
 
         Model.Set();
 
-        await Task.CompletedTask;
+        await Task.CompletedTask.ConfigureAwait(false);
     }
 }
