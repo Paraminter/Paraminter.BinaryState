@@ -3,6 +3,9 @@
 using Paraminter.BinaryState.Commands;
 using Paraminter.Cqs;
 
+using System.Threading;
+using System.Threading.Tasks;
+
 /// <summary>Handles commands by resetting a binary state.</summary>
 /// <typeparam name="TQuery">The type of the handled commands.</typeparam>
 public sealed class BinaryStateResettingCommandHandler<TQuery>
@@ -19,14 +22,15 @@ public sealed class BinaryStateResettingCommandHandler<TQuery>
         StateResetter = stateResetter ?? throw new System.ArgumentNullException(nameof(stateResetter));
     }
 
-    void ICommandHandler<TQuery>.Handle(
-        TQuery command)
+    async Task ICommandHandler<TQuery>.Handle(
+        TQuery command,
+        CancellationToken cancellationToken)
     {
         if (command is null)
         {
             throw new System.ArgumentNullException(nameof(command));
         }
 
-        StateResetter.Handle(ResetBinaryStateCommand.Instance);
+        await StateResetter.Handle(ResetBinaryStateCommand.Instance, cancellationToken);
     }
 }

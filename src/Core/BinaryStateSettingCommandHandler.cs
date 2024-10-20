@@ -3,6 +3,9 @@
 using Paraminter.BinaryState.Commands;
 using Paraminter.Cqs;
 
+using System.Threading;
+using System.Threading.Tasks;
+
 /// <summary>Handles commands by setting a binary state.</summary>
 /// <typeparam name="TCommand">The type of the handled commands.</typeparam>
 public sealed class BinaryStateSettingCommandHandler<TCommand>
@@ -19,14 +22,15 @@ public sealed class BinaryStateSettingCommandHandler<TCommand>
         StateSetter = stateSetter ?? throw new System.ArgumentNullException(nameof(stateSetter));
     }
 
-    void ICommandHandler<TCommand>.Handle(
-        TCommand command)
+    async Task ICommandHandler<TCommand>.Handle(
+        TCommand command,
+        CancellationToken cancellationToken)
     {
         if (command is null)
         {
             throw new System.ArgumentNullException(nameof(command));
         }
 
-        StateSetter.Handle(SetBinaryStateCommand.Instance);
+        await StateSetter.Handle(SetBinaryStateCommand.Instance, cancellationToken);
     }
 }

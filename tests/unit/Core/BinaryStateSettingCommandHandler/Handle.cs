@@ -6,6 +6,7 @@ using Paraminter.BinaryState.Commands;
 using Paraminter.Cqs;
 
 using System;
+using System.Threading;
 
 using Xunit;
 
@@ -16,7 +17,7 @@ public sealed class Handle
     {
         var fixture = FixtureFactory.Create<ICommand>();
 
-        var result = Record.Exception(() => Target(fixture, null!));
+        var result = Record.Exception(() => Target(fixture, null!, CancellationToken.None));
 
         Assert.IsType<ArgumentNullException>(result);
     }
@@ -26,16 +27,17 @@ public sealed class Handle
     {
         var fixture = FixtureFactory.Create<ICommand>();
 
-        Target(fixture, Mock.Of<ICommand>());
+        Target(fixture, Mock.Of<ICommand>(), CancellationToken.None);
 
-        fixture.StateSetterMock.Verify(static (handler) => handler.Handle(It.IsAny<ISetBinaryStateCommand>()), Times.Once());
+        fixture.StateSetterMock.Verify(static (handler) => handler.Handle(It.IsAny<ISetBinaryStateCommand>(), It.IsAny<CancellationToken>()), Times.Once());
     }
 
     private static void Target<TCommand>(
         IFixture<TCommand> fixture,
-        TCommand command)
+        TCommand command,
+        CancellationToken cancellationToken)
         where TCommand : ICommand
     {
-        fixture.Sut.Handle(command);
+        fixture.Sut.Handle(command, cancellationToken);
     }
 }

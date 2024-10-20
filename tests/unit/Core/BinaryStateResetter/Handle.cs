@@ -5,6 +5,7 @@ using Moq;
 using Paraminter.BinaryState.Commands;
 
 using System;
+using System.Threading;
 
 using Xunit;
 
@@ -15,7 +16,7 @@ public sealed class Handle
     [Fact]
     public void NullCommand_ThrowsArgumentNullException()
     {
-        var result = Record.Exception(() => Target(null!));
+        var result = Record.Exception(() => Target(null!, CancellationToken.None));
 
         Assert.IsType<ArgumentNullException>(result);
     }
@@ -23,14 +24,15 @@ public sealed class Handle
     [Fact]
     public void ValidArguments_Resets()
     {
-        Target(Mock.Of<IResetBinaryStateCommand>());
+        Target(Mock.Of<IResetBinaryStateCommand>(), CancellationToken.None);
 
         Fixture.ModelMock.Verify(static (model) => model.Reset(), Times.Once);
     }
 
     private void Target(
-        IResetBinaryStateCommand command)
+        IResetBinaryStateCommand command,
+        CancellationToken cancellationToken)
     {
-        Fixture.Sut.Handle(command);
+        Fixture.Sut.Handle(command, cancellationToken);
     }
 }

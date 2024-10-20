@@ -5,6 +5,8 @@ using Moq;
 using Paraminter.BinaryState.Queries;
 
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 using Xunit;
 
@@ -13,30 +15,31 @@ public sealed class Handle
     private readonly IFixture Fixture = FixtureFactory.Create();
 
     [Fact]
-    public void NullQuery_ThrowsArgumentNullException()
+    public async Task NullQuery_ThrowsArgumentNullException()
     {
-        var result = Record.Exception(() => Target(null!));
+        var result = await Record.ExceptionAsync(() => Target(null!, CancellationToken.None));
 
         Assert.IsType<ArgumentNullException>(result);
     }
 
     [Fact]
-    public void Set_ReturnsTrue() => ReturnsValue(true);
+    public async Task Set_ReturnsTrue() => await ReturnsValue(true);
 
     [Fact]
-    public void NotSet_ReturnsFalse() => ReturnsValue(false);
+    public async Task NotSet_ReturnsFalse() => await ReturnsValue(false);
 
-    private bool Target(
-        IIsBinaryStateSetQuery query)
+    private async Task<bool> Target(
+        IIsBinaryStateSetQuery query,
+        CancellationToken cancellationToken)
     {
-        return Fixture.Sut.Handle(query);
+        return await Fixture.Sut.Handle(query, cancellationToken);
     }
 
-    private void ReturnsValue(bool expected)
+    private async Task ReturnsValue(bool expected)
     {
         Fixture.ModelMock.Setup(static (model) => model.IsSet).Returns(expected);
 
-        var result = Target(Mock.Of<IIsBinaryStateSetQuery>());
+        var result = await Target(Mock.Of<IIsBinaryStateSetQuery>(), CancellationToken.None);
 
         Assert.Equal(expected, result);
     }
