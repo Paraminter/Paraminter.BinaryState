@@ -5,6 +5,8 @@ using Paraminter.BinaryState.Queries;
 using Paraminter.Cqs;
 
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 /// <summary>Reads whether a binary state is set.</summary>
 public sealed class BinaryStateReader
@@ -20,14 +22,15 @@ public sealed class BinaryStateReader
         Model = model ?? throw new ArgumentNullException(nameof(model));
     }
 
-    bool IQueryHandler<IIsBinaryStateSetQuery, bool>.Handle(
-        IIsBinaryStateSetQuery query)
+    async Task<bool> IQueryHandler<IIsBinaryStateSetQuery, bool>.Handle(
+        IIsBinaryStateSetQuery query,
+        CancellationToken cancellationToken)
     {
         if (query is null)
         {
             throw new ArgumentNullException(nameof(query));
         }
 
-        return Model.IsSet;
+        return await Task.FromResult(Model.IsSet);
     }
 }

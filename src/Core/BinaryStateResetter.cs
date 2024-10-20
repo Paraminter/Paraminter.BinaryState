@@ -5,6 +5,8 @@ using Paraminter.BinaryState.Models;
 using Paraminter.Cqs;
 
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 /// <summary>Resets a binary state.</summary>
 public sealed class BinaryStateResetter
@@ -20,8 +22,9 @@ public sealed class BinaryStateResetter
         Model = model ?? throw new ArgumentNullException(nameof(model));
     }
 
-    void ICommandHandler<IResetBinaryStateCommand>.Handle(
-        IResetBinaryStateCommand command)
+    async Task ICommandHandler<IResetBinaryStateCommand>.Handle(
+        IResetBinaryStateCommand command,
+        CancellationToken cancellationToken)
     {
         if (command is null)
         {
@@ -29,5 +32,7 @@ public sealed class BinaryStateResetter
         }
 
         Model.Reset();
+
+        await Task.CompletedTask;
     }
 }
