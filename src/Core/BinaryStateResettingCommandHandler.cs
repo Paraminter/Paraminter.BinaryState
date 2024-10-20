@@ -31,6 +31,6 @@ public sealed class BinaryStateResettingCommandHandler<TQuery>
             throw new System.ArgumentNullException(nameof(command));
         }
 
-        await StateResetter.Handle(ResetBinaryStateCommand.Instance, cancellationToken);
+        await StateResetter.Handle(ResetBinaryStateCommand.Instance, cancellationToken).ConfigureAwait(false);
     }
 }

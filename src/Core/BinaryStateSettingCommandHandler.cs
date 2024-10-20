@@ -31,6 +31,6 @@ public sealed class BinaryStateSettingCommandHandler<TCommand>
             throw new System.ArgumentNullException(nameof(command));
         }
 
-        await StateSetter.Handle(SetBinaryStateCommand.Instance, cancellationToken);
+        await StateSetter.Handle(SetBinaryStateCommand.Instance, cancellationToken).ConfigureAwait(false);
     }
 }
